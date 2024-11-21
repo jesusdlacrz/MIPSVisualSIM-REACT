@@ -29,8 +29,8 @@ const DebuggerComponent = ({
         </div>
         <div className="debugger-info" id="debugger-info">
           <p>Program Counter: {pc}</p>
-          <p>Current Instruction: {currentInstruction}</p>
-          <p>Previous Instruction: {previousInstruction}</p>
+          <p>Current Instruction: {currentInstruction || "Ninguna"}</p>
+          <p>Previous Instruction: {previousInstruction || "Ninguna"}</p>
         </div>
       </div>
     </div>
