@@ -14,7 +14,6 @@ const Simulator: React.FC = () => {
   const [registers, setRegisters] = useState<Registers>({});
   const [memory, setMemory] = useState<{ [key: number]: number }>({});
   const [pc, setPC] = useState<number>(0);
-  // Eliminamos 'history' ya que no se utiliza
 
   // Inicializar registros y memoria
   useEffect(() => {
@@ -137,7 +136,6 @@ const Simulator: React.FC = () => {
   };
 
   const stepBackMIPS = () => {
-    // Eliminamos la funcionalidad de 'stepBack' ya que 'history' no se utiliza
     console.warn("La función de retroceso no está disponible.");
   };
 
