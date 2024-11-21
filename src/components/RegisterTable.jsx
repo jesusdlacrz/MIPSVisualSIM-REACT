@@ -12,10 +12,10 @@ const RegisterTable = ({ registers }) => {
           </tr>
         </thead>
         <tbody>
-          {Object.keys(registers).map((regName) => (
-            <tr key={regName}>
-              <td>{regName}</td>
-              <td>{`0x${registers[regName].toString(16).toUpperCase()}`}</td>
+          {Object.keys(registers).map((register) => (
+            <tr key={register}>
+              <td>{register}</td>
+              <td>{`0x${registers[register].toString(16).toUpperCase()}`}</td>
             </tr>
           ))}
         </tbody>

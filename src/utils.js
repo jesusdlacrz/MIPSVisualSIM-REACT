@@ -21,7 +21,7 @@ export function translateInstructionToHex(instruction) {
     "gp": "11100", "sp": "11101", "fp": "11110", "ra": "11111"
   };
 
-  const parts = instruction.replace(/,/g, '').split(' ');
+  const parts = instruction.split(' ');
 
   const opcode = opcodeMap[parts[0]];
   if (!opcode) return "Unknown Instruction";
@@ -37,16 +37,15 @@ export function translateInstructionToHex(instruction) {
   } else if (["lw", "sw"].includes(parts[0])) {
     // I-type instruction
     const rt = regMap[parts[1]];
-    const offsetAndRs = parts[2].split('(');
-    const offset = parseInt(offsetAndRs[0], 10);
-    const rs = regMap[offsetAndRs[1]?.replace(')', '')];
-    if (!rt || !rs || isNaN(offset)) return "Invalid Syntax";
-    binaryInstruction += rs + rt + (offset >>> 0).toString(2).padStart(16, '0');
+    const rs = regMap[parts[3].split(',')[0]];
+    const immediate = parseInt(parts[2]);
+    if (!rt || !rs || isNaN(immediate)) return "Invalid Syntax";
+    binaryInstruction += rs + rt + (immediate >>> 0).toString(2).padStart(16, '0');
   } else if (["addi"].includes(parts[0])) {
     // I-type instruction
     const rt = regMap[parts[1]];
     const rs = regMap[parts[2]];
-    const immediate = parseInt(parts[3], 10);
+    const immediate = parseInt(parts[3]);
     if (!rt || !rs || isNaN(immediate)) return "Invalid Syntax";
     binaryInstruction += rs + rt + (immediate >>> 0).toString(2).padStart(16, '0');
   } else if (["beq", "bne"].includes(parts[0])) {
@@ -56,12 +55,12 @@ export function translateInstructionToHex(instruction) {
     const label = parts[3];
     if (!rs || !rt) return "Invalid Registers";
     // For simplicity, assuming label is an immediate value (offset)
-    const offset = parseInt(label, 10);
+    const offset = parseInt(label);
     if (isNaN(offset)) return "Invalid Syntax";
     binaryInstruction += rs + rt + (offset >>> 0).toString(2).padStart(16, '0');
   } else if (["j"].includes(parts[0])) {
     // J-type instruction
-    const address = parseInt(parts[1], 10);
+    const address = parseInt(parts[1]);
     if (isNaN(address)) return "Invalid Syntax";
     binaryInstruction += (address >>> 0).toString(2).padStart(26, '0');
   } else {
@@ -107,7 +106,7 @@ export function translateInstructionToMIPS(hexInstruction) {
   const opcode = binaryInstruction.slice(0, 6);
   const opcodeMIPS = opcodeMap[opcode];
 
-  if (!opcodeMIPS) return "Unknown Instruction, opcode null";
+  if (!opcodeMIPS) return "Unknown Instruction";
 
   let mipsInstruction = "";
 
@@ -131,30 +130,28 @@ export function translateInstructionToMIPS(hexInstruction) {
     mipsInstruction = `${funcMIPS} ${rdName} ${rsName} ${rtName}`;
   } else if (["lw", "sw"].includes(opcodeMIPS)) {
     // I-type instruction
-    const rs = binaryInstruction.slice(6, 11);
     const rt = binaryInstruction.slice(11, 16);
-    const immediate = binaryInstruction.slice(16, 32);
+    const rs = binaryInstruction.slice(6, 11);
+    const offset = binaryInstruction.slice(16, 32);
 
-    const rsName = regMap[rs];
     const rtName = regMap[rt];
+    const rsName = regMap[rs];
+    const offsetValue = parseInt(offset, 2);
 
-    const immediateValue = parseInt(immediate, 2);
+    if (!rtName || !rsName || isNaN(offsetValue)) return "Invalid Syntax";
 
-    if (!rsName || !rtName || isNaN(immediateValue)) return "Invalid Syntax";
-
-    mipsInstruction = `${opcodeMIPS} ${rtName} ${immediateValue}(${rsName})`;
+    mipsInstruction = `${opcodeMIPS} ${rtName} ${offsetValue}(${rsName})`;
   } else if (opcodeMIPS === "addi") {
     // I-type instruction
-    const rs = binaryInstruction.slice(6, 11);
     const rt = binaryInstruction.slice(11, 16);
+    const rs = binaryInstruction.slice(6, 11);
     const immediate = binaryInstruction.slice(16, 32);
 
-    const rsName = regMap[rs];
     const rtName = regMap[rt];
-
+    const rsName = regMap[rs];
     const immediateValue = parseInt(immediate, 2);
 
-    if (!rsName || !rtName || isNaN(immediateValue)) return "Invalid Syntax";
+    if (!rtName || !rsName || isNaN(immediateValue)) return "Invalid Syntax";
 
     mipsInstruction = `${opcodeMIPS} ${rtName}, ${rsName}, ${immediateValue}`;
   } else if (["beq", "bne"].includes(opcodeMIPS)) {
@@ -165,7 +162,6 @@ export function translateInstructionToMIPS(hexInstruction) {
 
     const rsName = regMap[rs];
     const rtName = regMap[rt];
-
     const offsetValue = parseInt(offset, 2);
 
     if (!rsName || !rtName || isNaN(offsetValue)) return "Invalid Syntax";
@@ -174,14 +170,13 @@ export function translateInstructionToMIPS(hexInstruction) {
   } else if (opcodeMIPS === "j") {
     // J-type instruction
     const address = binaryInstruction.slice(6, 32);
-
     const addressValue = parseInt(address, 2);
 
+    if (isNaN(addressValue)) return "Invalid Syntax";
+
     mipsInstruction = `${opcodeMIPS} ${addressValue}`;
-  } else if (opcodeMIPS === "Unsupported") {
-    return `Unsupported Instruction opcode: ${opcodeMIPS}`;
   } else {
-    return `Unknown Instruction opcode: ${opcode}`;
+    return `Unsupported Instruction opcode: ${opcodeMIPS}`;
   }
 
   return mipsInstruction;

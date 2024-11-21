@@ -5,9 +5,10 @@ const InputArea = ({ mipsInput, onChange }) => {
     <div className="input-container">
       <textarea
         className="textarea"
+        id="mips-input"
+        placeholder="Enter MIPS instructions here..."
         value={mipsInput}
         onChange={onChange}
-        placeholder="Enter MIPS instructions here..."
       />
     </div>
   );

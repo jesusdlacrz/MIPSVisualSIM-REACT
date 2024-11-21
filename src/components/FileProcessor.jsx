@@ -12,8 +12,11 @@ const FileProcessor = ({ onProcessFile }) => {
 
   return (
     <div id="dropArea">
-      <input type="file" id="fileInput" onChange={handleFileChange} style={{ display: "none" }} />
-      <button onClick={() => document.getElementById("fileInput").click()}>Process File</button>
+      <p>Drag and drop a RAM file here, or click to select one.</p>
+      <input type="file" id="fileInput" style={{ display: "none" }} onChange={handleFileChange} />
+      <button id="process-file-button" onClick={() => document.getElementById("fileInput").click()}>
+        Process File
+      </button>
     </div>
   );
 };
