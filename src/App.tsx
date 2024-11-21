@@ -5,6 +5,7 @@ import "./index.css";
 const App: React.FC = () => {
   return (
     <div className="container">
+      <h1>hola</h1>
       <Simulator />
     </div>
   );
