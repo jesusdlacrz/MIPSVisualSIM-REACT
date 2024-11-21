@@ -1,16 +1,6 @@
 import React from "react";
 
-interface DebuggerProps {
-  pc: number;
-  currentInstruction: string;
-  previousInstruction: string;
-  onRun: () => void;
-  onStepIn: () => void;
-  onStepOver: () => void;
-  onReset: () => void;
-}
-
-const DebuggerComponent: React.FC<DebuggerProps> = ({
+const DebuggerComponent = ({
   pc,
   currentInstruction,
   previousInstruction,

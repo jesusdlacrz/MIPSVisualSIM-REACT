@@ -1,10 +1,6 @@
 import React from "react";
 
-interface RegisterTableProps {
-  registers: { [key: string]: number };
-}
-
-const RegisterTable: React.FC<RegisterTableProps> = ({ registers }) => {
+const RegisterTable = ({ registers }) => {
   return (
     <div className="table-container">
       <h2>Registers</h2>

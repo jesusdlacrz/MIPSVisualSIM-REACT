@@ -4,25 +4,21 @@ import FileProcessor from "./FileProcessor";
 import RamTable from "./RamTable";
 import RegisterTable from "./RegisterTable";
 import DebuggerComponent from "./Debugger";
+import { translateInstructionToHex, translateInstructionToMIPS } from "../utils";
 
-interface Registers {
-  [key: string]: number;
-}
+const Simulator = () => {
+  const [mipsInput, setMipsInput] = useState("");
+  const [registers, setRegisters] = useState({});
+  const [memory, setMemory] = useState({});
+  const [pc, setPC] = useState(0);
 
-const Simulator: React.FC = () => {
-  const [mipsInput, setMipsInput] = useState<string>("");
-  const [registers, setRegisters] = useState<Registers>({});
-  const [memory, setMemory] = useState<{ [key: number]: number }>({});
-  const [pc, setPC] = useState<number>(0);
-
-  // Inicializar registros y memoria
   useEffect(() => {
     resetMIPS();
   }, []);
 
   const resetMIPS = () => {
     setPC(0);
-    const initialRegisters: Registers = {
+    const initialRegisters = {
       zero: 0,
       at: 0,
       v0: 0,
@@ -57,14 +53,14 @@ const Simulator: React.FC = () => {
       ra: 0,
     };
     setRegisters(initialRegisters);
-    const initialMemory: { [key: number]: number } = {};
+    const initialMemory = {};
     for (let i = 0; i < 32; i++) {
       initialMemory[i] = 0;
     }
     setMemory(initialMemory);
   };
 
-  const executeMIPSInstruction = (instruction: string) => {
+  const executeMIPSInstruction = (instruction) => {
     const [op, ...operands] = instruction.split(" ").filter((s) => s !== "");
     setRegisters((prevRegisters) => {
       const newRegisters = { ...prevRegisters };
@@ -101,6 +97,19 @@ const Simulator: React.FC = () => {
           }
           break;
         }
+        case "addi": {
+          const [rt, rs, immediate] = operands;
+          if (rt && rs && immediate) {
+            if (prevRegisters[rs] !== undefined) {
+              newRegisters[rt] = prevRegisters[rs] + parseInt(immediate, 10);
+            } else {
+              console.error(`Registro no definido: ${rs}`);
+            }
+          } else {
+            console.error("Número incorrecto de operandos para 'addi'");
+          }
+          break;
+        }
         // Agrega más casos según sea necesario
         default: {
           console.error("Operación no soportada:", op);
@@ -109,7 +118,6 @@ const Simulator: React.FC = () => {
       }
       return newRegisters;
     });
-    // Si modificas la memoria en alguna instrucción, utiliza setMemory de manera similar
   };
 
   const simulateMIPS = () => {
@@ -120,6 +128,7 @@ const Simulator: React.FC = () => {
         executeMIPSInstruction(instruction.trim());
       }
     });
+    updateTables();
   };
 
   const stepMIPS = () => {
@@ -133,16 +142,41 @@ const Simulator: React.FC = () => {
       setPC((prevPC) => prevPC + 1);
       stepMIPS(); // Saltar líneas vacías
     }
+    updateTables();
   };
 
   const stepBackMIPS = () => {
     console.warn("La función de retroceso no está disponible.");
   };
 
-  const handleMipsInputChange = (
-    e: React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
+  const handleMipsInputChange = (e) => {
     setMipsInput(e.target.value);
+  };
+
+  const updateTables = () => {
+    // Actualizar la tabla de registros
+    const registerTable = document.getElementById("registerTable");
+    if (registerTable) {
+      const rows = registerTable.getElementsByTagName("tr");
+      for (let i = 1; i < rows.length; i++) {
+        const registerName = rows[i].cells[0].textContent;
+        if (registerName) {
+          const registerValue = registers[registerName].toString(16).toUpperCase();
+          rows[i].cells[1].textContent = "0x" + registerValue;
+        }
+      }
+    }
+
+    // Actualizar la tabla de memoria
+    const memoryTable = document.getElementById("ramTable");
+    if (memoryTable) {
+      const rows = memoryTable.getElementsByTagName("tr");
+      for (let i = 1; i < rows.length; i++) {
+        const memoryAddress = parseInt(rows[i].cells[0].textContent || "0", 16);
+        const memoryValue = memory[memoryAddress].toString(16).toUpperCase();
+        rows[i].cells[1].textContent = "0x" + memoryValue;
+      }
+    }
   };
 
   return (
@@ -151,7 +185,6 @@ const Simulator: React.FC = () => {
       <InputArea mipsInput={mipsInput} onChange={handleMipsInputChange} />
       <FileProcessor
         onProcessFile={(content) => {
-          // Manejar el contenido del archivo
           console.log("Contenido del archivo:", content);
         }}
       />

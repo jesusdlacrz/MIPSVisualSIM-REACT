@@ -1,10 +1,6 @@
 import React from "react";
 
-interface RamTableProps {
-  memory: { [key: number]: number };
-}
-
-const RamTable: React.FC<RamTableProps> = ({ memory }) => {
+const RamTable = ({ memory }) => {
   return (
     <div className="table-container">
       <h2>RAM</h2>
@@ -18,8 +14,8 @@ const RamTable: React.FC<RamTableProps> = ({ memory }) => {
         <tbody>
           {Object.keys(memory).map((address) => (
             <tr key={address}>
-              <td>{`0x${parseInt(address).toString(16).toUpperCase()}`}</td>
-              <td>{`0x${memory[parseInt(address)].toString(16).toUpperCase()}`}</td>
+              <td>{`0x${parseInt(address, 10).toString(16).toUpperCase()}`}</td>
+              <td>{`0x${memory[address].toString(16).toUpperCase()}`}</td>
             </tr>
           ))}
         </tbody>
