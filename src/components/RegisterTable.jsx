@@ -1,27 +1,28 @@
-import React from "react";
+// components/RegisterTable.js
+import React from 'react';
 
-const RegisterTable = ({ registers }) => {
+function RegisterTable({ registers }) {
   return (
     <div className="table-container">
-      <h2>Registers</h2>
+      <h2>Registros</h2>
       <table id="registerTable">
         <thead>
           <tr>
-            <th>Register</th>
-            <th>Value</th>
+            <th>Registro</th>
+            <th>Valor</th>
           </tr>
         </thead>
         <tbody>
-          {Object.keys(registers).map((register) => (
+          {Object.entries(registers).map(([register, value]) => (
             <tr key={register}>
               <td>{register}</td>
-              <td>{`0x${registers[register].toString(16).toUpperCase()}`}</td>
+              <td>{`0x${value.toString(16).padStart(2, '0')}`}</td>
             </tr>
           ))}
         </tbody>
       </table>
     </div>
   );
-};
+}
 
 export default RegisterTable;
