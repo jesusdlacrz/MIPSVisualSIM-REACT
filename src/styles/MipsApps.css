@@ -1,0 +1,42 @@
+.inputs-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    gap: 1rem;
+}
+
+.row-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    gap: 1rem;
+}
+
+.input-text-area {
+    width: 25rem;
+    height: 10rem;
+    border: 3px solid #7db179;
+    border-radius: 8px;
+    padding: 0.5rem 0.8rem;
+    cursor: text;
+}
+
+.btn {
+    background-color: #b5c9b4;
+    border: 3px solid #7db179;
+    color: #000;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 0.75em;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    background-color: #b1b1b1;
+}
