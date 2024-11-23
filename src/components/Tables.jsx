@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../styles/SimulationTables.css';
+import '../styles/Tables.css';
 const SimulationTables = ({ registers, memory }) => {
   return (
     <div id="simulation-tables" className='tables-container'>

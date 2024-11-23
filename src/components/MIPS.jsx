@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Debugger from "../Debugger";
-import  DropArea  from "../DropArea";
-import  SimulationTables  from "../Tables";
-import "../../styles/MipsApps.css";
+import Debugger from "./Debugger";
+import  DropArea  from "./DropArea";
+import  SimulationTables  from "./Tables";
+import "../styles/MipsApps.css";
 
 const initialRegisters = {
   zero: 0,

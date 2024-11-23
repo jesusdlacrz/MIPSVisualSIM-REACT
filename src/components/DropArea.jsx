@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { preventDefaults } from './utils/preventDefaults';
-import { handleDrop } from './utils/handleDrop';
-import '../../styles/DropArea.css';
+import { handleDrop, preventDefaults  } from '../utils/DropFunctions';
+import '../styles/DropArea.css';
 
 const DropArea = ({ setMipsInput, setHexInput }) => {
   const [isHighlight, setIsHighlight] = useState(false);

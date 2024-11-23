@@ -1,5 +1,14 @@
-import { preventDefaults } from './preventDefaults';
-import { translateInstructionToMIPS } from '../../../utils/Converter';
+import { translateInstructionToMIPS } from './Converter';
+
+let isHighlight = false;
+export const setIsHighlight = (value) => {
+  isHighlight = value;
+};
+
+export const preventDefaults = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
 
 export const handleDrop = (e, setIsHighlight, setMipsInput, setHexInput) => {
   preventDefaults(e);
