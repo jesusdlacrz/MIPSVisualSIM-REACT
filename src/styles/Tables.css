@@ -13,12 +13,10 @@
     align-items: center;
     justify-content: center;
     gap: 1rem;
+    flex: 1;
 }
 
 .values {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
     justify-content: center;
     gap: 4rem;
 }

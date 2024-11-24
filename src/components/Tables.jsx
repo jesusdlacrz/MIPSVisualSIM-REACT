@@ -1,5 +1,6 @@
 import React from 'react';
 import '../styles/Tables.css';
+
 const SimulationTables = ({ registers, memory }) => {
   return (
     <div id="simulation-tables" className='tables-container'>
@@ -12,12 +13,14 @@ const SimulationTables = ({ registers, memory }) => {
           </tr>
         </thead>
         <tbody>
-          {Object.keys(memory).map((addr) => (
-            <tr key={addr} className='values'>
-              <td>{`0x${parseInt(addr).toString(16).toUpperCase()}`}</td>
-              <td>{`0x${memory[addr].toString(16).toUpperCase()}`}</td>
-            </tr>
-          ))}
+          {Object.keys(memory)
+            .filter(addr => parseInt(addr) <= 0xF)
+            .map((addr) => (
+              <tr key={addr} className='values'>
+                <td>{`0x${parseInt(addr).toString(16).toUpperCase()}`}</td>
+                <td>{`0x${memory[addr].toString(16).toUpperCase()}`}</td>
+              </tr>
+            ))}
         </tbody>
       </table>
       <table id="registerTable" className='table'>

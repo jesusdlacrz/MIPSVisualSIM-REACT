@@ -1,42 +1,18 @@
 import React, { useState } from "react";
 import Debugger from "./Debugger";
-import  DropArea  from "./Drop";
-import  SimulationTables  from "./Tables";
+import DropArea from "./Drop";
+import SimulationTables from "./Tables";
 import "../styles/MIPS.css";
 
-const initialRegisters = {
-  zero: 0,
-  at: 0,
-  v0: 0,
-  v1: 0,
-  a0: 0,
-  a1: 0,
-  a2: 0,
-  a3: 0,
-  t0: 0,
-  t1: 0,
-  t2: 0,
-  t3: 0,
-  t4: 0,
-  t5: 0,
-  t6: 0,
-  t7: 0,
-  s0: 0,
-  s1: 0,
-  s2: 0,
-  s3: 0,
-  s4: 0,
-  s5: 0,
-  s6: 0,
-  s7: 0,
-  t8: 0,
-  t9: 0,
-  k0: 0,
-  k1: 0,
-  gp: 0,
-  sp: 0,
-  fp: 0,
-  ra: 0,
+const Registers = {
+  zero: 0, at: 0, v0: 0, v1: 0,
+  a0: 0, a1: 0, a2: 0, a3: 0,
+  t0: 0, t1: 0, t2: 0, t3: 0,
+  t4: 0, t5: 0, t6: 0, t7: 0,
+  s0: 0, s1: 0, s2: 0, s3: 0,
+  s4: 0, s5: 0, s6: 0, s7: 0,
+  t8: 0, t9: 0, k0: 0, k1: 0,
+  gp: 0, sp: 0, fp: 0, ra: 0
 };
 
 const initialMemory = Array.from({ length: 32 }).reduce(
@@ -47,7 +23,7 @@ const initialMemory = Array.from({ length: 32 }).reduce(
 const MIPS = () => {
   const [mipsInput, setMipsInput] = useState("");
   const [hexInput, setHexInput] = useState("");
-  const [registers, setRegisters] = useState(initialRegisters);
+  const [registers, setRegisters] = useState(Registers);
   const [memory, setMemory] = useState(initialMemory);
   const [PC, setPC] = useState(0);
   const [history, setHistory] = useState([]);
@@ -65,7 +41,7 @@ const MIPS = () => {
     const hexInstructions = mipsInput.trim().split("\n");
     resetMIPS();
 
-    const newRegisters = { ...initialRegisters };
+    const newRegisters = { ...Registers };
     const newMemory = { ...initialMemory };
 
     hexInstructions.forEach((instruction) => {
@@ -106,38 +82,39 @@ const MIPS = () => {
   const resetMIPS = () => {
     setPC(0);
     setHistory([]);
-    setRegisters(initialRegisters);
+    setRegisters(Registers);
     setMemory(initialMemory);
   };
 
   return (
     <div>
-      <section className="inputs-container">
-        <div className="row-container">
           <textarea
             id="mips-input"
             className="input-text-area"
             value={mipsInput}
             onChange={(e) => setMipsInput(e.target.value)}
           />
-          <button
+        <div className="nose">
+        <DropArea setMipsInput={setMipsInput} setHexInput={setHexInput} />
+        <button
             id="simulate-mips-button"
-            className="btn"
+            className="btnSimulate"
             onClick={simulateMIPS}
           >
             Simulate MIPS
           </button>
         </div>
-        <DropArea setMipsInput={setMipsInput} setHexInput={setHexInput} />
-      </section>
+        <div className="bottom-section">
+        <Debugger
+            PC={PC}
+            simulateMIPS={simulateMIPS}
+            mipsInput={mipsInput}
+            stepMIPS={stepMIPS}
+            stepBackMIPS={stepBackMIPS}
+            resetMIPS={resetMIPS}
+          />
       <SimulationTables registers={registers} memory={memory} />
-      <Debugger
-        PC={PC}
-        mipsInput={mipsInput}
-        stepMIPS={stepMIPS}
-        stepBackMIPS={stepBackMIPS}
-        resetMIPS={resetMIPS}
-      />
+      </div>
     </div>
   );
 };
@@ -180,8 +157,6 @@ function executeMIPSInstruction(instruction, registers, memory) {
     case "lw": {
       const [rt, rs, offset] = operands;
       const address = registers[rs] + parseInt(offset);
-      //console.log('lw address:', address);
-      //console.log('lw memory value:', memory[address]);
       if (memory.hasOwnProperty(address)) {
         registers[rt] = memory[address];
       } else {
@@ -192,7 +167,6 @@ function executeMIPSInstruction(instruction, registers, memory) {
     case "sw": {
       const [rt, rs, offset] = operands;
       const address = registers[rs] + parseInt(offset);
-      //console.log('sw rt:', rt, 'rs', rs, 'offset', offset, 'address', address,'getting', registers[rt] );
       memory[address] = registers[rt];
       break;
     }

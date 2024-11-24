@@ -17,7 +17,7 @@
 }
 
 .input-text-area {
-    width: 25rem;
+    width: 55%;
     height: 10rem;
     border: 3px solid #7db179;
     border-radius: 8px;
@@ -39,4 +39,12 @@
 
 .btn:hover {
     background-color: #b1b1b1;
+}
+
+.nose {
+    display: flex;
+    justify-content: center;
+    gap: 20rem;
+    flex: 1;
+    margin: 2rem;
 }
