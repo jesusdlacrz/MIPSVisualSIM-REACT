@@ -1,4 +1,5 @@
 /* Contenedor para RAM, Debugger y Registros */
+/* Contenedor para RAM, Debugger y Registros */
 .bottom-section {
     display: flex;
     justify-content: center;
@@ -6,3 +7,33 @@
     gap: 1rem;
 }
 
+.bottom-section > div {
+    flex: 1;
+}
+/* Estilos para las tablas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+table th {
+    background-color: #6c7388;
+    font-weight: bold;
+}
+
+
+table tr:hover {
+    background-color: #464d63;
+}
+
+/* Estilos específicos para las tablas de RAM y registros */
+.RAMtable, .REGISTERtable {
+    width: auto;
+    margin: 0 auto;
+}

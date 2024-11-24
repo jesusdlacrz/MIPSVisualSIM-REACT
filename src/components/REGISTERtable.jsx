@@ -6,7 +6,6 @@ const REGISTERtable = ({ registers}) => {
     <div id="simulation-tables" className='tables-container'>
       <table id="registerTable" className='REGISTERtable'>
         <thead>
-        <h2>Registers</h2>
           <tr className='values'>
             <th>Register</th>
             <th>Value</th>

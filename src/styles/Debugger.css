@@ -8,6 +8,8 @@
     margin-top: 10rem;
     height: fit-content;
     padding: 10px 20px;
+    width: auto;
+    max-width: 400px; 
 }
 
 .Debugger h2 {
@@ -15,7 +17,4 @@
     width: fit-content;
     margin: 10px auto;
 }
-
-
-
 

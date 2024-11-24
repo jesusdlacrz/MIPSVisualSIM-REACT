@@ -6,7 +6,6 @@ const RAMtable = ({ memory }) => {
     <div id="simulation-tables" className='tables-container'>
       <table id="ramTable" className='RAMtable' >
         <thead>
-        <h2>RAM</h2>
           <tr className='values'>
             <th>Address</th>
             <th>Value</th>
