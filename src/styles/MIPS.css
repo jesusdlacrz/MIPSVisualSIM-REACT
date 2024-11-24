@@ -44,7 +44,7 @@
 .nose {
     display: flex;
     justify-content: center;
-    gap: 20rem;
+    gap: 5rem;
     flex: 1;
     margin: 2rem;
 }

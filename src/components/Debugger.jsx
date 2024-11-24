@@ -25,7 +25,7 @@ const DebuggerInfo = ({ PC, instructions }) => {
 const Debugger = ({ PC, mipsInput, stepMIPS, stepBackMIPS, resetMIPS, simulateMIPS }) => {
   const instructions = mipsInput.trim().split('\n');
   return (
-    <div id="debugger">
+    <div id="debugger" className='Debugger'>
       <h2>Debugger</h2>
       <ControlButtons
         simulateMIPS={simulateMIPS}

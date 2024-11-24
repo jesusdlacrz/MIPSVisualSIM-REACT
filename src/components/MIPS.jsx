@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Debugger from "./Debugger";
 import DropArea from "./Drop";
-import SimulationTables from "./Tables";
 import "../styles/MIPS.css";
+import RAMtable from "./RAMtable";
+import REGISTERtable from "./REGISTERtable";
 
 const Registers = {
   zero: 0, at: 0, v0: 0, v1: 0,
@@ -88,32 +89,35 @@ const MIPS = () => {
 
   return (
     <div>
-          <textarea
-            id="mips-input"
-            className="input-text-area"
-            value={mipsInput}
-            onChange={(e) => setMipsInput(e.target.value)}
-          />
-        <div className="nose">
+      <textarea
+        id="mips-input"
+        className="input-text-area"
+        value={mipsInput}
+        onChange={(e) => setMipsInput(e.target.value)}
+      />
+      <div className="nose">
         <DropArea setMipsInput={setMipsInput} setHexInput={setHexInput} />
         <button
-            id="simulate-mips-button"
-            className="btnSimulate"
-            onClick={simulateMIPS}
-          >
-            Simulate MIPS
-          </button>
-        </div>
-        <div className="bottom-section">
+          id="simulate-mips-button"
+          className="btnSimulate"
+          onClick={simulateMIPS}
+        >
+          Simulate MIPS
+        </button>
+      </div>
+      <div className="bottom-section">
+
+        <RAMtable memory={memory} />
         <Debugger
-            PC={PC}
-            simulateMIPS={simulateMIPS}
-            mipsInput={mipsInput}
-            stepMIPS={stepMIPS}
-            stepBackMIPS={stepBackMIPS}
-            resetMIPS={resetMIPS}
-          />
-      <SimulationTables registers={registers} memory={memory} />
+          PC={PC}
+          simulateMIPS={simulateMIPS}
+          mipsInput={mipsInput}
+          stepMIPS={stepMIPS}
+          stepBackMIPS={stepBackMIPS}
+          resetMIPS={resetMIPS}
+        />
+        <REGISTERtable registers={registers} />
+
       </div>
     </div>
   );

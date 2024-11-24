@@ -1,22 +1,8 @@
-.tables-container {
+/* Contenedor para RAM, Debugger y Registros */
+.bottom-section {
     display: flex;
-    flex-direction: row;
-    align-items: center;
     justify-content: center;
-    margin-top: 2rem;
-    gap: 4rem;
-}
-
-.table {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
     gap: 1rem;
-    flex: 1;
 }
 
-.values {
-    justify-content: center;
-    gap: 4rem;
-}
