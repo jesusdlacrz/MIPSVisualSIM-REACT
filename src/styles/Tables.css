@@ -37,3 +37,15 @@ table tr:hover {
     width: auto;
     margin: 0 auto;
 }
+
+.RAMtable , .REGISTERtable  {
+    display: block;
+    max-height: 40rem; /* Ajusta este valor según sea necesario */
+    overflow-y: auto;
+}
+
+.RAMtable thead, .REGISTERtable thead, .RAMtable tbody tr, .REGISTERtable tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}

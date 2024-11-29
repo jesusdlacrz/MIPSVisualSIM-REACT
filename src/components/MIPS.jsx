@@ -95,7 +95,7 @@ const MIPS = () => {
         value={mipsInput}
         onChange={(e) => setMipsInput(e.target.value)}
       />
-      <div className="nose">
+      <div className="containerbuttons">
         <DropArea setMipsInput={setMipsInput} setHexInput={setHexInput} />
         <button
           id="simulate-mips-button"

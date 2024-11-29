@@ -41,10 +41,22 @@
     background-color: #b1b1b1;
 }
 
-.nose {
+.containerbuttons {
     display: flex;
     justify-content: center;
     gap: 5rem;
     flex: 1;
     margin: 2rem;
 }
+
+.btnSimulate {
+
+    color: #000;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 0.75em;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 1rem;
+}	

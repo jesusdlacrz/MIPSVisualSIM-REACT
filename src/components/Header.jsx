@@ -3,7 +3,7 @@ import React from 'react';
 const Header = () => {
     return (
         <header>
-            <h1>MIPS Visualiser</h1>
+            <h1 className='titleHeader'>MIPS Visualiser</h1>
         </header>
     );
 };
