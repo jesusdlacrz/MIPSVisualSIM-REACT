@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/Circuit.css';
-import circuitImage from '../images/image.png';
+import circuitImage from '../images/MIPSCIRCUIT.png';
 
 const CircuitImage = () => {
   return (

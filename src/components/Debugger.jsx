@@ -3,7 +3,7 @@ import '../styles/Debugger.css';
 
 const ControlButtons = ({ simulateMIPS, stepMIPS, stepBackMIPS, resetMIPS }) => {
   return (
-    <div id="control-buttons">
+    <div id="control-buttons" className='control-buttons'>
       <button onClick={simulateMIPS}>RUN</button>
       <button onClick={stepMIPS}>NEXT</button>
       <button onClick={stepBackMIPS}>BACK</button>
