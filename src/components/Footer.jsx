@@ -4,7 +4,7 @@ import '../styles/Footer.css';
 const Footer = () => {
     return (
         <div className='FooterSection'>
-            <h2 className=''>lo cambio despues</h2>
+            <p className=''>Copyright © 2024</p>
         </div>
     );
 };

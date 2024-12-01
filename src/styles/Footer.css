@@ -1,10 +1,9 @@
 .FooterSection {
-    background: #2fa79d;
+    background: #2d7586;
   }
   
-  .FooterSection h2{
-    color: #f5f5f5;
-    font-size: 2rem;
+  .FooterSection p{
+    color: #f8f8f8;
     margin: 0;
     padding: 1rem;
   }
