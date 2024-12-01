@@ -22,8 +22,6 @@
   font-size: 1rem;
 }
 
-/* Estilos de los iconos */
-
 ul {
   list-style: none;
   padding: 0;
@@ -34,7 +32,7 @@ ul {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem; /* Espacio entre iconos */
+  gap: 1rem; 
 }
 
 .icon-content {
