@@ -2,11 +2,13 @@ import React from 'react';
 import '../styles/Circuit.css';
 import defaultImage from '../images/MIPSCIRCUIT.png';
 import addImage from '../images/ADD.png';
-import subImage from '../images/MIPSCIRCUIT.png';
+import addiImage from '../images/ADDI.png';
+import lwImage from '../images/LW.png';
 
 const instructionImages = {
-  addi: addImage,
-  sub: subImage,
+  add: addImage,
+  addi: addiImage,
+  lw: lwImage,
 };
 
 const CircuitImage = ({ currentInstruction, registers }) => {
