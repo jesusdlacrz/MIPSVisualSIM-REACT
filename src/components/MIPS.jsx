@@ -58,11 +58,11 @@ const MIPS = () => {
   const stepMIPS = () => {
     const instructions = mipsInput.trim().split("\n");
     if (PC >= instructions.length) return;
-
     setHistory([
       ...history,
       { PC, registers: { ...registers }, memory: { ...memory } },
     ]);
+
     const newRegisters = { ...registers };
     const newMemory = { ...memory };
     executeMIPSInstruction(instructions[PC], newRegisters, newMemory);
@@ -74,12 +74,14 @@ const MIPS = () => {
   const stepBackMIPS = () => {
     if (PC === 0) return;
 
-    const lastState = history.pop();
+    const lastHistoryIndex = history.length - 1;
+    const lastState = history[lastHistoryIndex];
+
     if (lastState) {
       setPC(lastState.PC);
       setRegisters(lastState.registers);
       setMemory(lastState.memory);
-      setHistory(history.slice(0, -1));
+      setHistory(history.slice(0, lastHistoryIndex));
     }
   };
 
