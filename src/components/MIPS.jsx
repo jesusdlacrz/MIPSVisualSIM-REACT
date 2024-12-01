@@ -29,6 +29,8 @@ const MIPS = () => {
   const [memory, setMemory] = useState(initialMemory);
   const [PC, setPC] = useState(0);
   const [history, setHistory] = useState([]);
+  const instructions = mipsInput.trim().split("\n");
+  const currentInstruction = instructions[PC] || '';
 
   const updateTables = (newRegisters, newMemory) => {
     setRegisters(newRegisters);
@@ -106,9 +108,8 @@ const MIPS = () => {
           Simulate MIPS
         </button>
       </div>
-      < CircuitImage />
+      <CircuitImage currentInstruction={currentInstruction} />
       <div className="bottom-section">
-
         <RAMtable memory={memory} />
         <Debugger
           PC={PC}
@@ -119,7 +120,6 @@ const MIPS = () => {
           resetMIPS={resetMIPS}
         />
         <REGISTERtable registers={registers} />
-
       </div>
     </div>
   );
