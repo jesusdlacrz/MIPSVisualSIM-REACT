@@ -17,47 +17,46 @@
 
 .register-value {
   position: absolute;
-  font-weight: bold;
   z-index: 50;
+  font-size: 1vw; 
 }
 
-
 .register-value.t0 {
-  top: 23%;
-  left: 32%;
+  top: 22.3%;
+  left: 32.7%;
 }
 
 .register-value.t1 {
-  top: 28%;
-  left: 32%;
+  top: 27.9%;
+  left: 32.7%;
 }
 
 .register-value.t2 {
-  top: 33%;
-  left: 32%;
+  top: 33.5%;
+  left: 32.7%;
 }
 
 .register-value.t3 {
-  top: 39%;
-  left: 32%;
+  top: 39.3%;
+  left: 32.7%;
 }
 
 .register-value.t4 {
   top: 45%;
-  left: 32%;
+  left: 32.7%;
 }
 
 .register-value.t5 {
-  top: 50%;
-  left: 32%;
+  top: 50.6%;
+  left: 32.7%;
 }
 
 .register-value.t6 {
-  top: 56%;
-  left: 32%;
+  top: 56.3%;
+  left: 32.7%;
 }
 
 .register-value.t7 {
   top: 62%;
-  left: 32%;
+  left: 32.7%;
 }
