@@ -28,6 +28,7 @@
     font-size: 1rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: border-color 0.3s, box-shadow 0.3s;
+    font-family: 'Montserrat', serif; 
 }
 
 .input-text-area:focus {
