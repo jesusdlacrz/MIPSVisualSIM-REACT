@@ -1,10 +1,11 @@
 .HeaderSection {
-  background: #4b4232;
+  background: #61f4dea2;
   margin-bottom: 2rem;
+  height: rem;
 }
 
 .titleHeader {
-  color: #f5f5f5;
+  color: #2fa79d;
   font-size: 2rem;
   margin: 0;
   padding: 1rem;

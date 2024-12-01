@@ -94,14 +94,14 @@ const MIPS = () => {
 
   return (
     <div>
-      <textarea
-        id="mips-input"
-        className="input-text-area"
-        value={mipsInput}
-        onChange={(e) => setMipsInput(e.target.value)}
-      />
-      <div className="containerbuttons">
+      <div className="row-container">
         <DropArea setMipsInput={setMipsInput} setHexInput={setHexInput} />
+        <textarea
+          id="mips-input"
+          className="input-text-area"
+          value={mipsInput}
+          onChange={(e) => setMipsInput(e.target.value)}
+        />
         <button
           id="simulate-mips-button"
           className="btnSimulate"
