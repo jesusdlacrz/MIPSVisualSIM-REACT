@@ -4,22 +4,25 @@ import defaultImage from '../images/MIPSCIRCUIT.png';
 import addImage from '../images/ADD.png';
 import subImage from '../images/MIPSCIRCUIT.png';
 
-
 const instructionImages = {
-  'add': addImage,
-  'sub': subImage,
-
+  addi: addImage,
+  sub: subImage,
 };
 
-const CircuitImage = ({ currentInstruction }) => {
-  // Extrae el operador de la instrucción actual
+const CircuitImage = ({ currentInstruction, registers }) => {
   const [opName] = currentInstruction.trim().split(' ');
-  // Selecciona la imagen correspondiente o una por defecto
   const imageSrc = instructionImages[opName] || defaultImage;
 
   return (
     <div className="circuit-container">
-      <img src={imageSrc} alt={`Circuito para ${opName}`} />
+      <div className="image-wrapper">
+        <img src={imageSrc} alt={`Circuito para ${opName}`} />
+        {['t0', 't1', 't2', 't3', 't4', 't5', 't6', 't7'].map((reg) => (
+          <div key={reg} className={`register-value ${reg}`}>
+            {`0x${registers[reg].toString(16).toUpperCase()}`}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
