@@ -4,11 +4,19 @@ import defaultImage from '../images/MIPSCIRCUIT.png';
 import addImage from '../images/ADD.png';
 import addiImage from '../images/ADDI.png';
 import lwImage from '../images/LW.png';
+import swImage from '../images/SW.png';
+import beqImage from '../images/BEQ.png';
+import bneImage from '../images/BNE.png';
+import jumpImage from '../images/JUMP.png';
 
 const instructionImages = {
   add: addImage,
   addi: addiImage,
   lw: lwImage,
+  sw: swImage,
+  beq: beqImage,
+  bne: bneImage,
+  j: jumpImage,
 };
 
 const CircuitImage = ({ currentInstruction, registers }) => {
