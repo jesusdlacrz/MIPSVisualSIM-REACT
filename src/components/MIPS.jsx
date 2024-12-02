@@ -112,6 +112,7 @@ const MIPS = () => {
         <textarea
           id="mips-input"
           className="input-text-area"
+          placeholder="Enter MIPS instructions here..."
           value={mipsInput}
           onChange={(e) => setMipsInput(e.target.value)}
         />
@@ -209,7 +210,6 @@ function executeMIPSInstruction(instruction, registers, memory, PC) {
       }
       break;
     }
-    // Add cases for other MIPS operations
     default: {
       console.error("Unsupported operation:", op);
       break;
