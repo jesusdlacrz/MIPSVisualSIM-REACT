@@ -47,12 +47,18 @@ const MIPS = () => {
 
     const newRegisters = { ...initialRegisters };
     const newMemory = { ...initialMemory };
+    let pc = 0;
 
-    hexInstructions.forEach((instruction) => {
-      executeMIPSInstruction(instruction, newRegisters, newMemory);
-    });
+    while (pc < hexInstructions.length) {
+      const newPC = executeMIPSInstruction(hexInstructions[pc], newRegisters, newMemory, pc);
+      if (newPC !== undefined) {
+        pc = newPC;
+      } else {
+        pc += 1;
+      }
+    }
 
-    updateTables(newRegisters, newMemory);
+  updateTables(newRegisters, newMemory);
   };
 
   const stepMIPS = () => {
