@@ -62,12 +62,19 @@ const MIPS = () => {
       ...history,
       { PC, registers: { ...registers }, memory: { ...memory } },
     ]);
-
+  
     const newRegisters = { ...registers };
     const newMemory = { ...memory };
-    executeMIPSInstruction(instructions[PC], newRegisters, newMemory);
+    const newPC = executeMIPSInstruction(instructions[PC], newRegisters, newMemory, PC);
+  
+    if (newPC !== undefined) {
+      console.log(newPC);
+      setPC(newPC);
 
-    setPC(PC + 1);
+    }else {
+      setPC(PC + 1);
+    }
+  
     updateTables(newRegisters, newMemory);
   };
 
@@ -127,7 +134,7 @@ const MIPS = () => {
   );
 };
 
-function executeMIPSInstruction(instruction, registers, memory) {
+function executeMIPSInstruction(instruction, registers, memory, PC) {
   // Split MIPS instruction into operation and operands
   const [op, ...operands] = instruction.split(" ");
   // Implement execution logic for each MIPS operation
@@ -176,6 +183,24 @@ function executeMIPSInstruction(instruction, registers, memory) {
       const [rt, rs, offset] = operands;
       const address = registers[rs] + parseInt(offset);
       memory[address] = registers[rt];
+      break;
+    }
+    case "j": {
+      const [address] = operands;
+      return parseInt(address); // Saltar a la instrucción indicada
+    }
+    case "beq": {
+      const [rs, rt, offset] = operands;
+      if (registers[rs] === registers[rt]) {
+        return PC + parseInt(offset); // Saltar a PC + offset
+      }
+      break;
+    }
+    case "bne": {
+      const [rs, rt, offset] = operands;
+      if (registers[rs] !== registers[rt]) {
+        return PC + parseInt(offset); // Saltar a PC + offset
+      }
       break;
     }
     // Add cases for other MIPS operations
