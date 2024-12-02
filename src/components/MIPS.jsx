@@ -193,19 +193,19 @@ function executeMIPSInstruction(instruction, registers, memory, PC) {
     }
     case "j": {
       const [address] = operands;
-      return parseInt(address); // Saltar a la instrucción indicada
+      return parseInt(address); 
     }
     case "beq": {
       const [rs, rt, offset] = operands;
       if (registers[rs] === registers[rt]) {
-        return PC + parseInt(offset); // Saltar a PC + offset
+        return PC + parseInt(offset);
       }
       break;
     }
     case "bne": {
       const [rs, rt, offset] = operands;
       if (registers[rs] !== registers[rt]) {
-        return PC + parseInt(offset); // Saltar a PC + offset
+        return PC + parseInt(offset); 
       }
       break;
     }
